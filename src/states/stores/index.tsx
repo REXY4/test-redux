@@ -9,7 +9,7 @@ const persistConfig = {
     key: 'root',
     storage: storage,
     blacklist: ['setting'],
-    // whitelist: ['setting'] 
+    whitelist: ['auth'] 
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

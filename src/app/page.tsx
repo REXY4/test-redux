@@ -1,17 +1,28 @@
 'use client'
+import { Col, Container, Row } from "react-bootstrap";
 import styles from "./page.module.css";
-import SettingUseCase from "@/use-case/settingUseCase";
+import FormInputRegister from "./components/InputGroub";
+import { useEffect } from "react";
+import AuthUseCase from "@/use-case/auth.usecase";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const {angka, setIncrement} =SettingUseCase();
+  const {isLogin} = AuthUseCase()
+  const router = useRouter();
+  useEffect(()=>{
+    if(isLogin){
+        router.replace("/home");
+    }
+  },[])
   return (
     <main className={styles.main}>
-      <div>
-        <p>{angka == null ? 0 : angka}</p>
-        <button onClick={()=>setIncrement(12)}>
-          tambah
-        </button>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <FormInputRegister/>
+          </Col>
+        </Row>
+      </Container>
     </main>
   );
 }
